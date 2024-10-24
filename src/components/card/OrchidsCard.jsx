@@ -10,6 +10,7 @@ export default function OrchidsCard({
   origin,
   category,
   id,
+  video,
 }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -35,11 +36,22 @@ export default function OrchidsCard({
           <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>{origin}</p>
-          <p>{rating}</p>
-          <p>{color}</p>
-          <p>{category}</p>
-          <p>{id}</p>
+          <img src={image} alt={name} style={{ width: "300px" }} />
+          <p>Category: {category}</p>
+          <p>Color: {color}</p>
+          <p>Origin: {origin}</p>
+          <p>Rating: {rating}</p>
+
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/xPXgebIDE6M?si=y9mRr8-jCQEkO9nA"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" onClick={() => setShowModal(false)}>

@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { ThemeContext } from "../../context/ThemeContext";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -10,7 +11,12 @@ export const Header = () => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
-
+  const accessToken = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/home");
+  };
   return (
     <Navbar bg={theme} variant={theme === "light" ? "light" : "dark"}>
       <Container bg={theme} variant={theme === "light" ? "light" : "dark"}>
@@ -23,6 +29,21 @@ export const Header = () => {
             {theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
           </button>
         </Nav>
+        {accessToken ? (
+          <div>
+            <Nav.Link href="/admin/manager-orchid">Admin Page</Nav.Link>
+            <hr />
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
+          <button
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Login
+          </button>
+        )}
       </Container>
     </Navbar>
   );

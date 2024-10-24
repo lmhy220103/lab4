@@ -13,6 +13,10 @@ import About from "./components/about/About";
 import Original from "./components/original/Original";
 import { listOrchids } from "./data/listOrchids";
 import { useContext, useEffect, useState } from "react";
+import Login from "./components/login/Login";
+import Admin from "./components/admin/Admin";
+import UpdateOrchid from "./components/admin/UpdateOrchid";
+import CreateOrchid from "./components/admin/CreateOrchid";
 
 function App() {
   const [orchids] = useState(listOrchids);
@@ -32,6 +36,13 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/natural" element={<Original orchids={orchids} />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin/manager-orchid" element={<Admin />} />
+          <Route path="/admin/manager-orchid/add" element={<CreateOrchid />} />
+          <Route
+            path="/admin/manager-orchid/update/:id"
+            element={<UpdateOrchid />}
+          />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
