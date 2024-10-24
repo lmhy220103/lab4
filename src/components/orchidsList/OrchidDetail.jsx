@@ -5,7 +5,9 @@ import { listOrchids } from "../../data/listOrchids";
 const OrchidDetail = () => {
   const { id } = useParams();
   const orchid = listOrchids.find((orchid) => orchid.id === Number(id));
-
+  const convertToEmbedLink = (videoUrl) => {
+    return videoUrl ? videoUrl.replace("watch?v=", "embed/") : "";
+  };
   return (
     <div style={{ padding: "20px" }}>
       {orchid ? (
@@ -24,7 +26,7 @@ const OrchidDetail = () => {
           <iframe
             width="560"
             height="315"
-            src={orchid.video}
+            src={convertToEmbedLink(orchid.video)}
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

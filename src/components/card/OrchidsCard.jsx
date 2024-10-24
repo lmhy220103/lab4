@@ -13,7 +13,9 @@ export default function OrchidsCard({
   video,
 }) {
   const [showModal, setShowModal] = useState(false);
-
+  const convertToEmbedLink = (videoUrl) => {
+    return videoUrl ? videoUrl.replace("watch?v=", "embed/") : ""; // Kiểm tra videoUrl
+  };
   return (
     <>
       <Card style={{ width: "300px" }}>
@@ -42,16 +44,31 @@ export default function OrchidsCard({
           <p>Origin: {origin}</p>
           <p>Rating: {rating}</p>
 
-          <iframe
+          {/* <iframe
             width="100%"
             height="315"
-            src="https://www.youtube.com/embed/xPXgebIDE6M?si=y9mRr8-jCQEkO9nA"
+            src={convertToEmbedLink(video)}
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen
-          />
+          /> */}
+
+          {video ? (
+            <iframe
+              width="100%"
+              height="315"
+              src={convertToEmbedLink(video)}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          ) : (
+            <p>No video available.</p>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" onClick={() => setShowModal(false)}>
