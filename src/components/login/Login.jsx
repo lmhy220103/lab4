@@ -12,18 +12,26 @@ const Login = () => {
       .then(async (result) => {
         const user = result.user;
         localStorage.setItem("accessToken", user.accessToken);
-        navigate("/admin/manager-orchid");
+        localStorage.setItem("email", user.email);
+        if (user.email === "leminhhy2212003@gmail.com") {
+          navigate("/admin/manager-orchid");
+        } else {
+          navigate("/home");
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
   const accessToken = localStorage.getItem("accessToken");
+  const email = localStorage.getItem("email");
   useEffect(() => {
-    if (accessToken) {
+    if (accessToken && email === "leminhhy2212003@gmail.com") {
       navigate("/admin/manager-orchid");
+    } else {
+      navigate("/home");
     }
-  }, [accessToken, navigate]);
+  }, [accessToken, email, navigate]);
   return (
     <Form
       style={{

@@ -14,7 +14,7 @@ export default function OrchidsCard({
 }) {
   const [showModal, setShowModal] = useState(false);
   const convertToEmbedLink = (videoUrl) => {
-    return videoUrl ? videoUrl.replace("watch?v=", "embed/") : ""; // Kiểm tra videoUrl
+    return videoUrl ? videoUrl.replace("watch?v=", "embed/") : "";
   };
   return (
     <>
@@ -55,7 +55,7 @@ export default function OrchidsCard({
             allowfullscreen
           /> */}
 
-          {video ? (
+          {video.includes("https://www.youtube.com/") ? (
             <iframe
               width="100%"
               height="315"

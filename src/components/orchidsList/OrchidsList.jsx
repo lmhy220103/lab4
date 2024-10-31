@@ -24,8 +24,8 @@ export const OrchidsList = () => {
       className="g-4"
       style={{
         padding: "30px",
-        backgroundColor: theme === "light" ? "white" : "#121212", // Chỉnh background dựa trên theme
-        color: theme === "light" ? "black" : "white", // Chỉnh màu chữ dựa trên theme
+        backgroundColor: theme === "light" ? "white" : "#121212", 
+        color: theme === "light" ? "black" : "white", 
       }}
     >
       {data.map((item) => (

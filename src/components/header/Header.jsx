@@ -12,6 +12,7 @@ export const Header = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
   const accessToken = localStorage.getItem("accessToken");
+  const email = localStorage.getItem("email");
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
@@ -30,9 +31,23 @@ export const Header = () => {
           </button>
         </Nav>
         {accessToken ? (
-          <div>
-            <Nav.Link href="/admin/manager-orchid">Admin Page</Nav.Link>
-            <hr />
+          <div
+            style={{
+              display: "flex",
+              border: "1px solid",
+              padding: "10px",
+            }}
+          >
+            {email === "leminhhy2212003@gmail.com" && (
+              <Nav.Link
+                href="/admin/manager-orchid"
+                style={{
+                  marginRight: "10px",
+                }}
+              >
+                Admin Page |{" "}
+              </Nav.Link>
+            )}
             <button onClick={handleLogout}>Logout</button>
           </div>
         ) : (
