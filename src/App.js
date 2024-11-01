@@ -17,6 +17,8 @@ import Login from "./components/login/Login";
 import Admin from "./components/admin/Admin";
 import UpdateOrchid from "./components/admin/UpdateOrchid";
 import CreateOrchid from "./components/admin/CreateOrchid";
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
+import UserPage from "./components/user/UserPage";
 
 function App() {
   const [orchids] = useState(listOrchids);
@@ -29,6 +31,7 @@ function App() {
     <BrowserRouter>
       <ThemeProvider>
         <Header />
+
         <Routes>
           <Route path="/" element={<OrchidsList />} />
           <Route path="/home" element={<OrchidsList />} />
@@ -37,12 +40,19 @@ function App() {
           <Route path="/natural" element={<Original orchids={orchids} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/admin/manager-orchid" element={<Admin />} />
-          <Route path="/admin/manager-orchid/add" element={<CreateOrchid />} />
-          <Route
-            path="/admin/manager-orchid/update/:id"
-            element={<UpdateOrchid />}
-          />
+          <Route path="/profile" element={<UserPage />} />
+          {/* <Route path="/admin/manager-orchid" element={<Admin />} /> */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin/manager-orchid" element={<Admin />} />
+            <Route
+              path="/admin/manager-orchid/add"
+              element={<CreateOrchid />}
+            />
+            <Route
+              path="/admin/manager-orchid/update/:id"
+              element={<UpdateOrchid />}
+            />
+          </Route>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

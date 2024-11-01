@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -13,11 +13,15 @@ export const Header = () => {
   };
   const accessToken = localStorage.getItem("accessToken");
   const email = localStorage.getItem("email");
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const handleLogout = () => {
+    localStorage.removeItem("email");
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
     navigate("/home");
   };
+  console.log(user);
   return (
     <Navbar bg={theme} variant={theme === "light" ? "light" : "dark"}>
       <Container bg={theme} variant={theme === "light" ? "light" : "dark"}>
@@ -38,14 +42,23 @@ export const Header = () => {
               padding: "10px",
             }}
           >
-            {email === "leminhhy2212003@gmail.com" && (
+            {user?.role === 1 ? (
               <Nav.Link
                 href="/admin/manager-orchid"
                 style={{
                   marginRight: "10px",
                 }}
               >
-                Admin Page |{" "}
+                Admin Page |
+              </Nav.Link>
+            ) : (
+              <Nav.Link
+                href="/profile"
+                style={{
+                  marginRight: "10px",
+                }}
+              >
+                Profile |
               </Nav.Link>
             )}
             <button onClick={handleLogout}>Logout</button>
